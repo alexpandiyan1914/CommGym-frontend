@@ -1,0 +1,94 @@
+.home-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
+      url("../assets/bgimg.png") center/cover no-repeat;
+    z-index: -1;
+  }
+}
+
+.split {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.panel {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  padding: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.7s ease;
+}
+
+/* LEFT */
+.left {
+  left: 0;
+  background: transparent;
+}
+
+/* RIGHT */
+.right {
+  right: 0;
+  background: transparent;
+}
+
+/* Divider */
+.divider {
+  position: absolute;
+  left: 50%;
+  width: 3px;
+  height: 100%;
+  background: #22c55e;
+  box-shadow: 0 0 15px #22c55e;
+  transition: opacity 0.5s ease;
+}
+
+/* ===== ABOUT ACTIVE ===== */
+
+.split.about {
+
+  .right {
+    width: 100%;
+    right: 0;
+  }
+
+  .left {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+
+  .divider {
+    opacity: 0;
+  }
+}
+
+/* ===== HOME ACTIVE ===== */
+
+.split.home {
+
+  .left {
+    width: 100%;
+  }
+
+  .right {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+
+  .divider {
+    opacity: 0;
+  }
+}

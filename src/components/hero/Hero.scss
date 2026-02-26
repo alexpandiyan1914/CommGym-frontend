@@ -1,0 +1,35 @@
+$primary: #22c55e;
+
+.hero {
+  max-width: 100%;
+  align-items: center;
+
+  .title {
+    font-size: 48px;
+    line-height: 1.2;
+    margin-bottom: 25px;
+
+    span {
+      color: $primary;
+    }
+  }
+
+  p {
+    opacity: 0.85;
+    margin-bottom: 35px;
+  }
+
+  .start-btn {
+    background: $primary;
+    padding: 15px 40px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: 0.3s;
+
+    &:hover {
+      transform: scale(1.07);
+      box-shadow: 0 0 20px $primary;
+      color: white;
+    }
+  }
+}
