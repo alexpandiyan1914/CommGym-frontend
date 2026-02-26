@@ -1,0 +1,27 @@
+$primary: #22c55e;
+
+.about {
+  max-width: 100%;
+  display: block;
+  align-items: center;
+
+  h1 {
+    font-size: 42px;
+    margin-bottom: 20px;
+    color: $primary;
+  }
+
+  p {
+    margin-bottom: 25px;
+    opacity: 0.9;
+  }
+
+  ul {
+    list-style: none;
+
+    li {
+      margin-bottom: 15px;
+      opacity: 0.85;
+    }
+  }
+}

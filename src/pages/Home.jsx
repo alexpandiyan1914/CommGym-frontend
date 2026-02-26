@@ -1,33 +1,31 @@
 import { useState } from "react";
-import Navbar from "../components/navbar";
-import Hero from "../components/Hero";
-import About from "../components/About";
-import Footer from "../components/Footer";
+import Navbar from "../components/navbar/Navbar";
+import Hero from "../components/hero/Hero";
+import About from "../components/about/About";
+import Footer from "../components/footer/Footer";
+import "./Home.scss";
 
 function Home() {
   const [view, setView] = useState("home");
   const [footerOpen, setFooterOpen] = useState(false);
 
   return (
-    <div className="container">
+    <div className="home-container">
       <Navbar setView={setView} />
 
-      <div className={`split-container ${view}`}>
-        <div className="left">
+      <div className={`split ${view}`}>
+        <div className="panel left">
           <Hero />
         </div>
 
         <div className="divider"></div>
 
-        <div className="right">
+        <div className="panel right">
           <About />
         </div>
       </div>
 
-      <Footer 
-        footerOpen={footerOpen} 
-        setFooterOpen={setFooterOpen} 
-      />
+      <Footer footerOpen={footerOpen} setFooterOpen={setFooterOpen} />
     </div>
   );
 }

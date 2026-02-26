@@ -1,0 +1,54 @@
+$primary: #22c55e;
+
+.navbar {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 60px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  margin-left: 12px;
+  margin-right: 12px;
+
+  .logo {
+    font-size: 28px;
+    font-weight: 700;
+
+    span {
+      color: $primary;
+    }
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+
+    button {
+      background: none;
+      color: white;
+      font-size: 16px;
+      transition: 0.3s;
+
+      &:hover {
+        color: $primary;
+      }
+    }
+  }
+
+  .login-btn {
+    background: $primary;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: 0.3s;
+    text-decoration: none;
+    color: black;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px $primary;
+      color: white;
+    }
+  }
+}
