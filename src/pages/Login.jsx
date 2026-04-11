@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.scss";
 
 function Login() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
     password: ""
@@ -33,7 +35,14 @@ function Login() {
     const validationErrors = validate();
 
     if (Object.keys(validationErrors).length === 0) {
-      alert("Login Successful 🚀");
+
+      // 🔥 TEMP LOGIN (no backend)
+      localStorage.setItem("token", "dummy_token");
+
+      alert("Login Successful");
+
+      navigate("/dashboard"); // redirect
+
     } else {
       setErrors(validationErrors);
     }
@@ -43,7 +52,9 @@ function Login() {
     <div className="cg-auth" id="cg-login">
       <div className="cg-auth__card">
 
-        <h2 className="cg-auth__title">Login to <span className="com-clr">Comm</span>Gym</h2>
+        <h2 className="cg-auth__title">
+          Login to <span className="com-clr">Comm</span>Gym
+        </h2>
 
         <form onSubmit={handleSubmit} noValidate>
 
