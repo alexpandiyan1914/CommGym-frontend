@@ -1,44 +1,88 @@
+import { useNavigate } from "react-router-dom";
 import "./Dashboard.scss";
+import { getWeekDays, getTodayIndex, getStreak } from "../utils/streak";
 
 function Dashboard() {
+  const navigate = useNavigate();
+
+  const days = getWeekDays();
+  const todayIndex = getTodayIndex();
+  const streak = getStreak();
+
   return (
     <div className="cg-dashboard">
 
-      <h2 className="cg-dashboard__title">
-        Welcome Back 👋
-      </h2>
+      {/* Top Bar */}
+      <div className="cg-topbar">
+        <h2 className="cg-logo">Comm<span>Gym</span></h2>
 
-      {/* Daily Task */}
-      <div className="cg-dashboard__card">
-        <h4>Today's Task</h4>
-        <p>
-          Speak for 2 minutes about:
-          <strong> "Your dream career"</strong>
-        </p>
+        <div className="cg-profile">
+          <span className="cg-profile__name">Alex</span>
+          <div className="cg-profile__avatar"></div>
+        </div>
       </div>
 
-      {/* Mic Section */}
-      <div className="cg-dashboard__card">
-        <h4>Start Speaking 🎤</h4>
-        <button className="btn btn-success">
-          Start Recording
+      {/* Streak */}
+      <div className="cg-streak-box">
+        🔥 {streak} Day Streak
+      </div>
+
+      {/* Week Days */}
+      <div className="cg-week">
+        {days.map((d, i) => (
+          <div
+            key={i}
+            className={`cg-day 
+              ${i === todayIndex ? "active" : ""}
+              ${i < todayIndex ? "completed" : ""}
+            `}
+          >
+            {d}
+          </div>
+        ))}
+      </div>
+
+      {/* Today's Workout */}
+      <div className="cg-workout-card">
+        <h3>Today’s Workout</h3>
+        <p>{getWorkoutName(todayIndex)}</p>
+
+        <button
+          className="btn btn-success"
+          onClick={() => navigate("/workout")}
+        >
+          Start Workout
         </button>
       </div>
 
-      {/* Feedback */}
-      <div className="cg-dashboard__card">
-        <h4>AI Feedback</h4>
-        <p>No data yet. Start speaking!</p>
-      </div>
+      {/* Knowledge Section */}
+      <div className="cg-content">
+        <div className="cg-box">
+          <h4>📰 Protein</h4>
+          <p>Learn how top speakers structure answers.</p>
+        </div>
 
-      {/* Progress */}
-      <div className="cg-dashboard__card">
-        <h4>Your Progress</h4>
-        <p>🔥 Streak: 3 days</p>
+        <div className="cg-box">
+          <h4>🎥 Creatine</h4>
+          <p>Watch high-impact communication breakdowns.</p>
+        </div>
       </div>
 
     </div>
   );
+}
+
+function getWorkoutName(index) {
+  const list = [
+    "Confidence Training",
+    "Fluency Control",
+    "Clarity Structuring",
+    "Interview Simulation",
+    "Pace Control",
+    "Thinking Fast",
+    "Performance Test"
+  ];
+  return list[index];
 }
 
 export default Dashboard;

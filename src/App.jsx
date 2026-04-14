@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
+import Workout from "./pages/Workout";
 
 const PrivateRoute = ({ children }) => {
   const isAuth = !!localStorage.getItem("token");
@@ -22,6 +23,15 @@ function App() {
           element={
             <PrivateRoute>
               <Dashboard />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/workout"
+          element={
+            <PrivateRoute>
+              <Workout />
             </PrivateRoute>
           }
         />

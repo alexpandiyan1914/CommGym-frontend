@@ -1,0 +1,47 @@
+.cg-workout {
+  min-height: 100vh;
+  background: #000;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Header */
+.cg-workout__header {
+  text-align: center;
+  margin-bottom: 30px;
+
+  h2 {
+    color: #22c55e;
+  }
+
+  p {
+    color: #aaa;
+  }
+}
+
+/* Card */
+.cg-workout__card {
+  background: #111;
+  padding: 30px;
+  border-radius: 12px;
+  width: 400px;
+  text-align: center;
+  border: 1px solid #222;
+}
+
+/* Timer */
+.cg-timer {
+  margin: 20px 0;
+  font-size: 24px;
+  color: #22c55e;
+}
+
+/* Controls */
+.cg-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
