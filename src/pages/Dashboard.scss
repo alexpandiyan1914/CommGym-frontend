@@ -1,19 +1,100 @@
 .cg-dashboard {
-  min-height: 100vh;
   background: #000;
   color: #fff;
-  padding: 40px;
+  min-height: 100vh;
+  padding: 30px 60px;
 }
 
-.cg-dashboard__title {
-  margin-bottom: 30px;
+/* Topbar */
+.cg-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cg-logo {
+  font-size: 22px;
+
+  span {
+    color: #22c55e;
+  }
+}
+
+.cg-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  &__avatar {
+    width: 35px;
+    height: 35px;
+    background: #22c55e;
+    border-radius: 50%;
+  }
+}
+
+/* Streak */
+.cg-streak-box {
+  margin: 30px 0;
+  font-size: 20px;
   color: #22c55e;
 }
 
-.cg-dashboard__card {
+/* Week */
+.cg-week {
+  display: flex;
+  gap: 15px;
+}
+
+.cg-day {
+  padding: 10px 15px;
+  border-radius: 8px;
+  background: #111;
+  color: #777;
+
+  &.active {
+    background: #22c55e;
+    color: #000;
+    font-weight: bold;
+  }
+
+  &.completed {
+    color: #22c55e;
+  }
+}
+
+/* Workout Card */
+.cg-workout-card {
+  margin-top: 40px;
+  background: #111;
+  padding: 25px;
+  border-radius: 12px;
+
+  p {
+    margin: 10px 0 20px;
+    color: #ccc;
+  }
+}
+
+/* Content */
+.cg-content {
+  display: flex;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.cg-box {
+  flex: 1;
   background: #111;
   padding: 20px;
-  margin-bottom: 20px;
   border-radius: 10px;
-  border: 1px solid #222;
+
+  h4 {
+    margin-bottom: 10px;
+    color: #22c55e;
+  }
+
+  p {
+    color: #aaa;
+  }
 }
