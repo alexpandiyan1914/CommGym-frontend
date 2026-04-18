@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Workout from "./pages/Workout";
+import Profile from "./pages/Profile";
 
 const PrivateRoute = ({ children }) => {
   const isAuth = !!localStorage.getItem("token");
@@ -35,6 +36,8 @@ function App() {
             </PrivateRoute>
           }
         />
+
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
   );

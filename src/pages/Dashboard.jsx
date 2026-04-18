@@ -1,78 +1,135 @@
 import { useNavigate } from "react-router-dom";
 import "./Dashboard.scss";
-import { getWeekDays, getTodayIndex, getStreak } from "../utils/streak";
+import { useState, useRef, useEffect } from "react";
+import {
+  getWeekDays,
+  getTodayIndex,
+  getStreak
+} from "../utils/streak";
 
 function Dashboard() {
   const navigate = useNavigate();
 
-  const days = getWeekDays();
-  const todayIndex = getTodayIndex();
+  const weekDays = getWeekDays();
+  const today = getTodayIndex();
   const streak = getStreak();
+
+  const [open, setOpen] = useState(false);
+  const dropdownRef = useRef();
+
+  /* CLOSE DROPDOWN WHEN CLICK OUTSIDE */
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  /* LOGOUT */
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
 
   return (
     <div className="cg-dashboard">
 
-      {/* Top Bar */}
-      <div className="cg-topbar">
-        <h2 className="cg-logo">Comm<span>Gym</span></h2>
+      {/* HEADER */}
+      <div className="cg-header">
+        <h2>Comm<span>Gym</span></h2>
 
-        <div className="cg-profile">
-          <span className="cg-profile__name">Alex</span>
-          <div className="cg-profile__avatar"></div>
+        <div className="cg-profile" ref={dropdownRef}>
+
+          <div
+            className="cg-profile__trigger"
+            onClick={() => setOpen(!open)}
+          >
+            <span>{localStorage.getItem("username") || "Alex"}</span>
+            <div className="cg-avatar"></div>
+          </div>
+
+          {open && (
+            <div className="cg-dropdown">
+
+              <div
+                className="cg-dropdown__item"
+                onClick={() => navigate("/profile")}
+              >
+                👤 Profile
+              </div>
+
+              <div
+                className="cg-dropdown__item logout"
+                onClick={handleLogout}
+              >
+                🚪 Logout
+              </div>
+
+            </div>
+          )}
+
         </div>
       </div>
 
-      {/* Streak */}
-      <div className="cg-streak-box">
-        🔥 {streak} Day Streak
+      {/* STREAK */}
+      <div className="cg-streak">
+        🔥 <span>{streak}</span> Day Streak
       </div>
 
-      {/* Week Days */}
+      {/* WEEK TRACKER */}
       <div className="cg-week">
-        {days.map((d, i) => (
+        {weekDays.map((day, index) => (
           <div
-            key={i}
+            key={index}
             className={`cg-day 
-              ${i === todayIndex ? "active" : ""}
-              ${i < todayIndex ? "completed" : ""}
+              ${index === today ? "active" : ""}
+              ${index < today ? "completed" : ""}
             `}
           >
-            {d}
+            {day}
           </div>
         ))}
       </div>
 
-      {/* Today's Workout */}
+      {/* MAIN WORKOUT CARD */}
       <div className="cg-workout-card">
-        <h3>Today’s Workout</h3>
-        <p>{getWorkoutName(todayIndex)}</p>
+        <div>
+          <h3>Today’s Workout</h3>
+          <p>{getWorkoutName(today)}</p>
+        </div>
 
         <button
           className="btn btn-success"
           onClick={() => navigate("/workout")}
         >
-          Start Workout
+          Start Workout →
         </button>
       </div>
 
-      {/* Knowledge Section */}
-      <div className="cg-content">
-        <div className="cg-box">
+      {/* INSIGHTS */}
+      <div className="cg-insights">
+
+        <div className="cg-card protein">
           <h4>📰 Protein</h4>
-          <p>Learn how top speakers structure answers.</p>
+          <p>Learn powerful answer structures from top performers.</p>
         </div>
 
-        <div className="cg-box">
+        <div className="cg-card creatine">
           <h4>🎥 Creatine</h4>
-          <p>Watch high-impact communication breakdowns.</p>
+          <p>Analyze high-impact communication breakdowns.</p>
         </div>
+
       </div>
 
     </div>
   );
 }
 
-function getWorkoutName(index) {
+function getWorkoutName(i) {
   const list = [
     "Confidence Training",
     "Fluency Control",
@@ -82,7 +139,7 @@ function getWorkoutName(index) {
     "Thinking Fast",
     "Performance Test"
   ];
-  return list[index];
+  return list[i];
 }
 
 export default Dashboard;
